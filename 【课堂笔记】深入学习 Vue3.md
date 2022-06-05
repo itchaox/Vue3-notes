@@ -110,6 +110,7 @@
   2. 示例：（侦听某个对象）
 
      ```javascript
+     
      created() {
        this.$watch('info', (newValue, oldValue) => {
          this.name = newValue
@@ -119,5 +120,79 @@
        })
      }
      ```
-
      
+
+### 3.7 v-model
+
+* 特点：创建双向数据绑定
+* 本质：v-model 是一个语法糖（即简写形式）
+* 作用：监听用户的输入来更新数据
+* 原理：
+  1. v-bind 绑定 value 属性值
+  2. v-on 绑定 input 事件监听到函数中，函数会获取最新的值并赋值到绑定 value 中
+
+## 4. 组件化开发
+
+### 4.1 全局组件
+
+* 概念：在任何组件中都可以使用的组件
+
+* 注册方式：
+
+  ```javascript
+  app.component('my-nav-button', { // 注册全局组件
+    template: '#app',
+    data() {
+    },
+    methods: {
+    }
+  })
+  ```
+
+### 4.2 局部组件
+
+* 概念：在注册的组件中才能使用的组件
+
+* 注册方式：
+
+  ```javascript
+  const App = {
+    template: '#app',
+    components: { // 和 data 一样的配置项
+      MyNavButton // 注册局部组件
+    }
+  }
+  ```
+
+### 4.3 组件名称
+
+1.  kebab-case（短横线分隔符）：
+   * 注意：使用时也必须使用 kebab-case 短横线分隔符
+   * 例子：`<my-nav-button />`
+2. PascalCase （驼峰标识符）：
+   * 注意：（两种使用方式）
+     1. 使用 PascalCase 驼峰标识符（在 template 模板中不推荐使用）
+     2. 使用kebab-case 短横线分隔符
+   * 例子：
+     1. `<MyNavButton />`
+     2. `<my-nav-button />`
+
+### 4.4 Vue 开发模式
+
+* 创建 .vue 单文件组件进行开发
+* .vue 文件内部结构划分：
+  1. template 标签：写 HTML 相关内容
+  2. script 标签：写 JavaScript 相关内容
+  3. style 标签：写 CSS 相关内容
+* 由于浏览器不认识 .vue 文件，所以需要使用 webpack、vite 之类的打包工具将 .vue 代码进行打包处理
+* 单文件组件特点：
+  1. 代码高亮
+  2. ES6、CommonJS 模块化能力
+  3. 组件作用域的 CSS
+  4. 使用 预处理器构建更加丰富的组件，比如：TypeScript、Less 等
+* 支持单文件组件的方式（SFC）：
+  * 方式一：使用 Vue CLI 创建项目，可以直接配置好所有的配置选项，然后可以直接使用 .vue 文件
+  * 方式二：使用 Webpack、Vite 等打包构建工具，自行配置相关是需要打包的内容
+
+## 5. Webpack
+
