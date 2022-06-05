@@ -196,3 +196,67 @@
 
 ## 5. Webpack
 
+### 5.1 Webpack 基础
+
+* 使用 Webpack 原因：随着前端快速发展，前端变得越来越复杂，需要一个打包处理工具进行相关操作
+* Vue、React、Angular 三个框架的脚手架都是基于 Webpack 进行搭建的
+* 概念：一个静态的模块化打包工具，服务于现代的 JavaScript 应用程序
+* 作用：将 TypeScript、Sass 等浏览器不能识别的代码，通过 Webpack 的打包编译后，让浏览器能识别和运行
+* 使用前提：Webpack 基于 Node 环境运行，所以必须安装 Node 环境才能使用 Webpack
+
+### 5.2 Vue 项目加载的文件
+
+1. JavaScript 打包：
+   * 将 ES6 转换成 ES5 的语法
+   * 将 TypeScript 语法，转换成 JavaScript
+2. CSS 处理：
+   * CSS 文件模块的加载和提取
+   * Less、Sass 等预处理器的处理
+3. 资源文件 img、font：
+   * 图片 img 文件的加载
+   * 字体 font 文件的加载
+4. HTML 资源的处理
+   * 打包 HTML 资源文件
+5. 处理 vue 项目的 SFC 文件的 .vue 文件
+
+### 5.3 Webpack 依赖图
+
+* webpack 处理应用程序时，会根据命令或者配置文件找到入口文件
+* 从入口开始，会生成一个依赖关系图，这个依赖关系图包含应用程序中所需的所有模块（比如 .js 文件、css 文件等）
+* 然后遍历图结构，打包一个个的模块（根据文件的不同使用不同的 loader 来解析）
+
+### 5.4 loader 配置方式
+
+* 在 webpack.config.js 文件中写明配置信息
+* module.rules 运行配置多个 loader，这种方式能更好的表示 loader 的配置，便于后期维护
+* module.rules 配置如下：
+  1. rules 属性值是一个数组
+  2. 数组中的每个 Rule 是一个对象
+     * test 属性：使用正则表达式匹配需要规则限定的资源
+     * use 属性：对应值是一个数组
+     * loader 属性：Rule.use[{ loader }] 的简写
+
+### 5.5 css-loader
+
+* loader：用于对模块源代码进行转换
+* 可以将 css-loader 看成是一个模块，因为是通过 import 来加载这个模块的
+* webpack 无法直接解析 css 模块，需要通过 css 对应的 loader 进行加载解析
+* 常用 CSS 的 loader：css-loader
+* css-loader 作用：解析 .css 文件
+
+### 5.6 style-loader
+
+* style-loader 作用：插入 style 操作
+* 需要先加载 css-loader，之后才加载 style-loader
+* 但是因为 loader 加载顺序是从后往前，所有 style-loader 应该写在 css-loader 之后
+
+### 5.7 处理 less 文件方式
+
+1. 安装 less 依赖
+2. 安装 less-loader 依赖
+3. 配置 rule 相关内容
+
+### 5.7 PostCSS 工具
+
+* 概念：一个通过 JavaScript 来转换样式的工具
+
