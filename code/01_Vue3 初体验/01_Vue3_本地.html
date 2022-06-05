@@ -4,7 +4,7 @@
  * @Author: wc
  * @Date: 2022-06-02 22:59:16
  * @LastEditors: wc
- * @LastEditTime: 2022-06-02 23:48:16
+ * @LastEditTime: 2022-06-05 10:27:52
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,26 @@
   <script src="../js/vue.js"></script>
   <script>
     const myVue3 = {
-      template: '<h2>初学 Vue3</h2>'
+      template: '<h2>初学 Vue3</h2>',
+      data() {
+        return {
+          info: {
+            name: 'itchao',
+            age: 18,
+            height: 1.88
+          }
+        }
+      },
+
+      watch: {
+        info: {
+          handler(newValue, oldValue) {
+            this.info.name = newValue
+          },
+          deep: true,
+          immediate: true
+        }
+      }
     }
     const app = Vue.createApp(myVue3)
     app.mount('#app')

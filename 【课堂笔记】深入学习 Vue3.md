@@ -45,3 +45,79 @@
 * 源码位置（有 key）：
 
   <img src="C:\Users\Administrator\Desktop\Vue3+TypeScript\Vue3-notes\【课堂笔记】深入学习 Vue3.assets\image-20220604205226957.png" alt="image-20220604205226957" style="zoom:80%;" />
+
+### 3.5 计算属性 computed
+
+* 特点：
+
+  1. 数据有缓存，相较方法而言性能更好
+  2. 一般是直接写一个方法，实际为 getter 的方法简写形式
+  3. template 标签模板中，尽量使用简单直观的变量名，不要进行过多计算操作。如果要进行复杂的计算操作，可以使用计算属性
+
+* 源码位置（传入函数或者对象的处理方式）：
+
+  <img src="C:\Users\Administrator\Desktop\Vue3+TypeScript\Vue3-notes\【课堂笔记】深入学习 Vue3.assets\image-20220604232650877.png" alt="image-20220604232650877" style="zoom:80%;" />
+
+### 3.6 侦听器 watch
+
+* 作用：在代码逻辑 (JavaScript) 中监听某个数据的变化
+
+* watch 配置项写法：
+
+  1. 侦听某个对象：（函数式简写形式）
+
+     ```javascript
+     watch: {
+       info(newValue, oldValue) {
+         this.name = newValue
+       }
+     }
+     ```
+
+  2. 侦听某个对象：（对象式完整写法）
+
+     ```javascript
+     watch: {
+       info: {
+         handler(newValue, oldValue) {
+           this.name = newValue
+         },
+           deep: true, // 是否开启深度侦听
+           immediate: true // 是否开启立即侦听（即首次加载会侦听一次） 
+       }
+     }
+     ```
+
+  3. 侦听某个对象的具体值：
+
+     ```javascript
+     watch: {
+       'info.name'(newValue, oldValue) {
+         this.name = newValue
+       }
+     }
+     ```
+
+* $watch 全局写法：
+
+  1. 说明：
+
+     * 第一个参数：侦听源，就是需要侦听的值
+     * 第二个参数：callback 回调函数
+     * 第三个参数：watch 相关配置项
+     * 存在一个返回值，该返回值是一个函数，调佣该函数即可取消侦听
+
+  2. 示例：（侦听某个对象）
+
+     ```javascript
+     created() {
+       this.$watch('info', (newValue, oldValue) => {
+         this.name = newValue
+       }, {
+         deep: true, // 开启深度侦听
+         immediate: true // 开启立即侦听
+       })
+     }
+     ```
+
+     
